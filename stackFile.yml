@@ -1,0 +1,50 @@
+version: '1.0'
+services:
+  - name: db
+    type: postgres
+    version: 9.6
+    configuration: StandAlone
+    ports:
+      - 5432
+    env:
+      POSTGRES_USER: cachethq
+      POSTGRES_PASSWORD: null
+    remoteAccess: false
+    deployTo:
+      - cachethq
+
+
+  - name: cachethq
+    type: docker
+    image: cachethq/docker
+    version: latest
+    ports:
+      - 8000
+    remoteAccess: false
+    env:
+      DB_DRIVER: "pgsql"
+      DB_HOST: "{{=service('db').getMasterAlias()}}"
+      DB_DATABASE: "{{=service('db').getEnv('POSTGRES_USER')}}"
+      DB_USERNAME: "{{=service('db').getEnv('POSTGRES_USER')}}"
+      DB_PASSWORD: "{{=service('db').getEnv('POSTGRES_PASSWORD')}}"
+      APP_KEY: "{{=randomString(32)}}"
+    deployTo:
+      - cachethq
+
+  - name: web
+    type: nginx
+    version: 1.13
+    ports:
+      - 80
+      - 443
+    remoteAccess: true
+    serviceFiles:
+      - name: cachethq
+    deployTo:
+      - cachethq
+
+hosts:
+  - name: cachethq
+    requirements:
+      cores: 1
+      memory: 1
