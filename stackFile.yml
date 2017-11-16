@@ -17,7 +17,7 @@ services:
   - name: cachethq
     type: docker
     image: cachethq/docker
-    version: latest
+    version: 2.3
     ports:
       - 8000
     remoteAccess: false
