@@ -6,7 +6,7 @@ services:
     configuration: StandAlone
     ports:
       - 5432
-    usename: cachethq
+    username: cachethq
     database: cachethq
     userPassword: null
     remoteAccess: false
