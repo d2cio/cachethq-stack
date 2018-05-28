@@ -24,7 +24,7 @@ services:
     env:
       DB_DRIVER: "pgsql"
       DB_HOST: "{{=service('db').getMasterAlias()}}"
-      DB_DATABASE: "{{=service('db').get('usename')}}"
+      DB_DATABASE: "{{=service('db').get('username')}}"
       DB_USERNAME: "{{=service('db').get('database')}}"
       DB_PASSWORD: "{{=service('db').get('userPassword')}}"
       APP_KEY: "{{=randomString(32)}}"
