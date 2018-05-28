@@ -6,9 +6,9 @@ services:
     configuration: StandAlone
     ports:
       - 5432
-    env:
-      POSTGRES_USER: cachethq
-      POSTGRES_PASSWORD: null
+    usename: cachethq
+    database: cachethq
+    userPassword: null
     remoteAccess: false
     deployTo:
       - cachethq
@@ -24,9 +24,9 @@ services:
     env:
       DB_DRIVER: "pgsql"
       DB_HOST: "{{=service('db').getMasterAlias()}}"
-      DB_DATABASE: "{{=service('db').getEnv('POSTGRES_USER')}}"
-      DB_USERNAME: "{{=service('db').getEnv('POSTGRES_USER')}}"
-      DB_PASSWORD: "{{=service('db').getEnv('POSTGRES_PASSWORD')}}"
+      DB_DATABASE: "{{=service('db').get('usename')}}"
+      DB_USERNAME: "{{=service('db').get('database')}}"
+      DB_PASSWORD: "{{=service('db').get('userPassword')}}"
       APP_KEY: "{{=randomString(32)}}"
     deployTo:
       - cachethq
