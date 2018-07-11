@@ -24,8 +24,8 @@ services:
     env:
       DB_DRIVER: "pgsql"
       DB_HOST: "{{=service('db').getMasterAlias()}}"
-      DB_DATABASE: "{{=service('db').get('username')}}"
-      DB_USERNAME: "{{=service('db').get('database')}}"
+      DB_DATABASE: "{{=service('db').get('database')}}"
+      DB_USERNAME: "{{=service('db').get('username')}}"
       DB_PASSWORD: "{{=service('db').get('userPassword')}}"
       APP_KEY: "{{=randomString(32)}}"
     deployTo:
@@ -33,7 +33,7 @@ services:
 
   - name: web
     type: nginx
-    version: 1.13
+    version: 1.14
     ports:
       - 80
       - 443
