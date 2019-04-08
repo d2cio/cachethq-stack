@@ -16,7 +16,7 @@ services:
   - name: cachethq
     type: docker
     image: cachethq/docker
-    version: 2.3
+    version: latest
     ports:
       - 8000
     remoteAccess: false
@@ -32,7 +32,7 @@ services:
 
   - name: web
     type: nginx
-    version: 1.14
+    version: 1.15
     ports:
       - 80
       - 443
